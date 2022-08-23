@@ -37,10 +37,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // home: ChatScreen(),
-        initialRoute: Reservation.screenRoute,
-        // _auth.currentUser != null
-        //     ? HomeScreen.screenRoute
-        //     : SplashScreen.screenRoute,
+        initialRoute:
+        _auth.currentUser != null
+            ? HomeScreen.screenRoute
+            : SplashScreen.screenRoute,
         routes: {
           SplashScreen.screenRoute: (context) => SplashScreen(),
           WelcomeScreen.screenRoute: (context) => WelcomeScreen(),
@@ -51,7 +51,6 @@ class MyApp extends StatelessWidget {
           DiseaseScreen.screenRoute: (context) => DiseaseScreen(),
           FactorsScreen.screenRoute: (context) => FactorsScreen(),
           Reservation.screenRoute: (context) => Reservation(),
-
         });
   }
 }

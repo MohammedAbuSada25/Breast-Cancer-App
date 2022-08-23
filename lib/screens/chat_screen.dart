@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:breast_cancer/widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,19 +19,17 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final _auth = FirebaseAuth.instance; //انشاء متغير باسم FirebaseAuth
+  final _auth = FirebaseAuth.instance;
   String? messageText;
   final messageController = TextEditingController();
 
   @override
   void initState() {
-    // هاد الميثود يثم تشغيلها اول شي قبل build
     super.initState();
     getCurrentUser();
   }
 
   void getCurrentUser() {
-    // هاد الميثود بيجيب ايميل المستخدم الي فايت فيه التطبيق
     try {
       final user = _auth.currentUser;
       if (user != null) {
@@ -63,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorButtonpink, //هاد لون الاب بار  معرفو بهاد الاسم
+        backgroundColor: colorButtonpink,
         // leading: IconButton(
         //   onPressed: () {
         //     // getMessagesStreams();
@@ -74,20 +71,18 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           children: [
             Material(
-                // هاد زي الكنتينر موجود بداخله اللوقو
-                color: Colors.white,
+              color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset('images/logo.png', height: 25),
-                )),
+                )
+            ),
             SizedBox(width: 10),
-            Text(
-              'المحادثة الجماعية',
-              style: TextStyle(fontSize: 22),
-            )
+            Text('المحادثة الجماعية',style: TextStyle(fontSize: 22),)
           ],
         ),
+
       ),
       body: SafeArea(
         child: Column(
@@ -125,18 +120,18 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      stdin.readLineSync();
-                      if (messageController.text.isNotEmpty) {
-                        messageController.clear();
-                        _firestore.collection("messages").add({
-                          "text": messageText,
-                          "sender": signedInUser.email,
-                          "time": FieldValue.serverTimestamp()
-                        });
-                      } else {
+                      if(messageController.text.isNotEmpty){
+                      messageController.clear();
+                      _firestore.collection("messages").add({
+                        "text": messageText,
+                        "sender": signedInUser.email,
+                        "time": FieldValue.serverTimestamp()
+                      });
+                    }
+                      else{
                         snackBar(context, "الرجاء ادخل الرسالة", Colors.red);
                       }
-                    },
+                      },
                     child: Text(
                       'ارسال',
                       style: TextStyle(
@@ -145,8 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         fontSize: 18,
                       ),
                     ),
-                  ),
-
+                  )
                 ],
               ),
             ),
@@ -157,14 +151,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-
-
 class MessageLine extends StatelessWidget {
   MessageLine({
-    // بستقبل البيانات الي ارسلتها هين الي هي الرسالة والمرسل وازا كان الحساب هو صاحب الرسالة ولا لا
     required this.text,
     required this.sender,
-    required this.isMe, // ازا كان الحساب هو صاحب الرسالة ولا لا هاد بستخدمها انو صاحب الرسالة بشوف رسالتو على ناحية والحسابات الأخرى على ناحية اخرى والنتيجة بحفظها ب bool اسمها isMe
+    required this.isMe,
   });
 
   final String text;
@@ -176,10 +167,8 @@ class MessageLine extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: isMe
-            ? CrossAxisAlignment.start
-            : CrossAxisAlignment
-                .end, // عامل if تفحص isMe صح ام خطا حسب النتيجة بحدد ازا يمين الرسالة تكون او شمال
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(
             sender,
@@ -187,30 +176,22 @@ class MessageLine extends StatelessWidget {
           ),
           Material(
             elevation: 5,
-            borderRadius:
-                isMe // عامل if تفحص isMe صح ام خطا حسب النتيجة بحدد شكل حاوية الرسالة
-                    ? BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))
-                    : BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
-            color: isMe
-                ? Colors.blue[800]
-                : Colors
-                    .white, // عامل if تفحص isMe صح ام خطا حسب النتيجة بحدد لون حاوية الرسالة
+            borderRadius: isMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20))
+                : BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
+            color: isMe ? Colors.blue[800] : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: 15,
-                    color: isMe
-                        ? Colors.white
-                        : Colors
-                            .black54), // عامل if تفحص isMe صح ام خطا حسب النتيجة بحدد لون النص
+                    fontSize: 15, color: isMe ? Colors.white : Colors.black54),
               ),
             ),
           ),
@@ -226,16 +207,10 @@ class MessageStreamBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      // StreamBuilder عشان يستنى عبال م يجيب البيانات من الفير بيز
-      stream: _firestore
-          .collection('messages')
-          .orderBy('time')
-          .snapshots(), // بجيب البيانات على شكل ستريم
+      stream: _firestore.collection('messages').orderBy('time').snapshots(),
       builder: (context, snapshot) {
-        // داخل هاد بحدد كيف بدي اعرض البيانات
         List<MessageLine> messageWidgets = [];
         if (!snapshot.hasData) {
-          // اذا كانت البيانت لسا ما اجت بعرضلي دائرة التحميل بوسط الشاشة
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -243,26 +218,25 @@ class MessageStreamBuilder extends StatelessWidget {
         }
         final messages = snapshot.data!.docs.reversed;
         for (var message in messages) {
-          // بهاد الفور بجيب البيانات وبفصل الرسالة عن ايميل المرسل عشان اقدر اتعامل مع كل وحدة على حدى
           final textMessage = message.get('text');
           final senderMessage = message.get('sender');
           final currentUser = signedInUser.email;
 
+          if (currentUser == senderMessage) {}
+
           final messageWidget = MessageLine(
-            // بستدعي MessageLine class وبرسل الها الرسالة وايميل المرسل
             text: textMessage,
             sender: senderMessage,
-            isMe: currentUser ==
-                senderMessage, // هين بحدد ازا المرسل هو صاحب الحساب الي فايت ام لا
+            isMe: currentUser == senderMessage,
           );
-          messageWidgets.add(messageWidget); // بضيف البيانات على الليست
+          messageWidgets.add(messageWidget);
         }
 
         return Expanded(
           child: ListView(
             reverse: true,
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            children: messageWidgets, // بعرض الليست ب listView
+            children: messageWidgets,
           ),
         );
       },

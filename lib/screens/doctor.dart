@@ -53,6 +53,14 @@ class DoctorScreen extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        Text(
+                          doctor.phone,
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 17,
                               fontWeight: FontWeight.w500,
                               overflow: TextOverflow.ellipsis),
                         ),
@@ -75,9 +83,7 @@ class DoctorScreen extends StatelessWidget {
                 controller: nameController,
                 keyboardType: TextInputType.name,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  nameController.text = value;
-                },
+
                 decoration: InputDecoration(
                   hintText: 'Enter your Name',
                   contentPadding: EdgeInsets.symmetric(
@@ -114,9 +120,7 @@ class DoctorScreen extends StatelessWidget {
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  phoneController.text = value;
-                },
+
                 decoration: InputDecoration(
                   hintText: 'Enter your Phone',
                   contentPadding: EdgeInsets.symmetric(
@@ -251,17 +255,21 @@ class DoctorScreen extends StatelessWidget {
                       snackBar(context, "الرجاء ادخل جميع الحقول", Colors.red);
                     }
                     else {
-                      nameController.clear();
-                      phoneController.clear();
-                      dateController.clear();
-                      timeController.clear();
                       _firestore.collection("reservations").add({
                         "name": nameController.text,
                         "phone": phoneController.text,
                         "date": dateController.text,
                         "time": timeController.text,
-                      }).then((value) =>
-                      snackBar(context, "تم الحجز", Colors.green));
+                        "doctor": doctor.name,
+                        "phoneDoctor": doctor.phone,
+                        "location": doctor.location,
+                      }).then((value) {
+                        snackBar(context, "تم الحجز", Colors.green);
+                        nameController.clear();
+                        phoneController.clear();
+                        dateController.clear();
+                        timeController.clear();
+                      });
                     }
                   }
               ),

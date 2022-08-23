@@ -1,3 +1,4 @@
+import 'package:breast_cancer/screens/reservation.dart';
 import 'package:breast_cancer/widgets/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListTileTheme(
               textColor: Colors.white,
               iconColor: Colors.white,
-              child: Column(
+              child: ListView( //Column
                 children: [
                   Container(
                     width: 128.0,
@@ -141,6 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     leading: Icon(Icons.chat),
                     title: Text('المحادثة الجماعية'),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      navigatePush(context, Reservation());
+                    },
+                    leading: Icon(Icons.perm_contact_cal_rounded),
+                    title: Text('احجز موعد مع الطبيب'),
                   ),
                   ListTile(
                     onTap: () {

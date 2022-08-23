@@ -1,3 +1,4 @@
+import 'package:breast_cancer/screens/reservation.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/my_button.dart';
@@ -34,6 +35,14 @@ class SeeDoctor extends StatelessWidget {
               ),
               SizedBox(height: 5,),
               Text("عند ظهور أي تغيرات في الثدي أو ظهور أحد الأعراض المذكورة سابقاً فيجب المسارعة للطبيب."
+              ),
+              SizedBox(height: 20,),
+              MyButton(
+                  color: colorButtonpink!,
+                  title: 'اختر طبيبك',
+                  onPressed:(){
+                    navigatePush(context, Reservation());
+                  }
               ),
 
 

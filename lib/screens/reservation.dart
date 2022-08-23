@@ -1,7 +1,6 @@
 import 'package:breast_cancer/screens/doctor.dart';
 import 'package:breast_cancer/widgets/modelReservation.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/my_button.dart';
 
 class Reservation extends StatelessWidget {
@@ -10,27 +9,33 @@ class Reservation extends StatelessWidget {
     Model(
         image: "images/doctor/doctor1.jpg",
         name: "د.فلان الفلاني1",
-        location: "رفح - الجنينة"),
+        location: "رفح - الجنينة",
+        phone: "0599999999"),
     Model(
         image: "images/doctor/doctor2.jpg",
-        name: "د.فلان الفلاني2",
-        location: "رفح - الجنينة"),
+        name: "د.فلان الفلاني1",
+        location: "رفح - الجنينة",
+        phone: "0599 999 999"),
     Model(
         image: "images/doctor/doctor3.jpg",
-        name: "د.فلان الفلاني3",
-        location: "رفح - الجنينة"),
+        name: "د.فلان الفلاني1",
+        location: "رفح - الجنينة",
+        phone: "0599 999 999"),
     Model(
         image: "images/doctor/doctor1.jpg",
-        name: "د.فلان الفلاني4",
-        location: "رفح - الجنينة"),
+        name: "د.فلان الفلاني1",
+        location: "رفح - الجنينة",
+        phone: "0599 999 999"),
     Model(
         image: "images/doctor/doctor2.jpg",
-        name: "د.فلان الفلاني5",
-        location: "رفح - الجنينة"),
+        name: "د.فلان الفلاني1",
+        location: "رفح - الجنينة",
+        phone: "0599 999 999"),
     Model(
         image: "images/doctor/doctor3.jpg",
-        name: "د.فلان الفلاني6",
-        location: "رفح - الجنينة"),
+        name: "د.فلان الفلاني1",
+        location: "رفح - الجنينة",
+        phone: "0599 999 999"),
   ];
 
   @override
@@ -56,6 +61,7 @@ class Reservation extends StatelessWidget {
               image: list[index].image,
               name: list[index].name,
               location: list[index].location,
+              phone: list[index].phone,
               index: index,
               context: context);
         },
@@ -68,6 +74,7 @@ class Reservation extends StatelessWidget {
       {required String image,
       required String name,
       required String location,
+      required String phone,
       required int index,
       required BuildContext context}) {
     return Padding(
@@ -96,6 +103,14 @@ class Reservation extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                  Text(
+                    phone,
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 17,
                         fontWeight: FontWeight.w500,
                         overflow: TextOverflow.ellipsis),
                   ),
