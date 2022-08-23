@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "686426030439",
+    "project_id": "alaa-b222a",
+    "storage_bucket": "alaa-b222a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686426030439:android:66af7e14fe6be85e6bafc2",
+        "android_client_info": {
+          "package_name": "com.example.breast_cancer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686426030439-imgj4j1tpq92rvqkc89scbk2uno3lqtv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.breast_cancer",
+            "certificate_hash": "0079259c9b02aab0e800d5967cbb63c1961446a9"
+          }
+        },
+        {
+          "client_id": "686426030439-2106n7r22ru1ihkem1ba9jlfprpob9is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkGGEU87apd9p6ztWok-KQzRFXidEkXfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686426030439-2106n7r22ru1ihkem1ba9jlfprpob9is.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
