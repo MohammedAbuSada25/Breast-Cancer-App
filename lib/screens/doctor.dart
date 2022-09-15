@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../widgets/my_button.dart';
 
 class DoctorScreen extends StatelessWidget {
-
   DoctorScreen(this.doctor);
   Model doctor;
 
@@ -40,7 +39,10 @@ class DoctorScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(doctor.image,height: 200,),
+                  Image.asset(
+                    doctor.image,
+                    height: 200,
+                  ),
                   Container(
                     padding: EdgeInsets.only(right: 10),
                     height: 200,
@@ -75,15 +77,15 @@ class DoctorScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
                 ],
               ),
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
               TextField(
                 controller: nameController,
                 keyboardType: TextInputType.name,
                 textAlign: TextAlign.center,
-
                 decoration: InputDecoration(
                   hintText: 'Enter your Name',
                   contentPadding: EdgeInsets.symmetric(
@@ -120,7 +122,6 @@ class DoctorScreen extends StatelessWidget {
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
                 textAlign: TextAlign.center,
-
                 decoration: InputDecoration(
                   hintText: 'Enter your Phone',
                   contentPadding: EdgeInsets.symmetric(
@@ -157,15 +158,14 @@ class DoctorScreen extends StatelessWidget {
                 controller: dateController,
                 keyboardType: TextInputType.datetime,
                 textAlign: TextAlign.center,
-                onTap: (){
+                onTap: () {
                   showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now(),
-                    lastDate:DateTime(2090),
+                    lastDate: DateTime(2090),
                   ).then((value) {
-                    dateController.text =
-                        DateFormat.yMMMd().format(value!);
+                    dateController.text = DateFormat.yMMMd().format(value!);
                   });
                 },
                 decoration: InputDecoration(
@@ -204,14 +204,13 @@ class DoctorScreen extends StatelessWidget {
                 controller: timeController,
                 keyboardType: TextInputType.datetime,
                 textAlign: TextAlign.center,
-                onTap: (){
+                onTap: () {
                   showTimePicker(
                     context: context,
                     initialTime: TimeOfDay.now(),
-
                   ).then((value) {
                     timeController.text = value!.format(context).toString();
-                  }) ;
+                  });
                 },
                 decoration: InputDecoration(
                   hintText: 'Enter your Date',
@@ -248,22 +247,22 @@ class DoctorScreen extends StatelessWidget {
               MyButton(
                   color: colorButtonpink!,
                   title: 'احجز',
-                  onPressed:(){
-                    if(nameController.text.isEmpty || timeController.text.isEmpty ||
-                        dateController.text.isEmpty || phoneController.text.isEmpty )
-                    {
+                  onPressed: () {
+                    if (nameController.text.isEmpty ||
+                        timeController.text.isEmpty ||
+                        dateController.text.isEmpty ||
+                        phoneController.text.isEmpty) {
                       snackBar(context, "الرجاء ادخل جميع الحقول", Colors.red);
-                    }
-                    else {
-                      _firestore.collection("reservations").add({
-                        "name": nameController.text,
-                        "phone": phoneController.text,
-                        "date": dateController.text,
-                        "time": timeController.text,
-                        "doctor": doctor.name,
-                        "phoneDoctor": doctor.phone,
-                        "location": doctor.location,
-                      }).then((value) {
+                    } else {
+                      addServiceData(
+                              name: nameController.text,
+                              phone: phoneController.text,
+                              date: dateController.text,
+                              time: timeController.text,
+                              doctorName: doctor.name,
+                              doctorPhone: doctor.phone,
+                              doctorLocation: doctor.location)
+                          .then((value) {
                         snackBar(context, "تم الحجز", Colors.green);
                         nameController.clear();
                         phoneController.clear();
@@ -271,14 +270,11 @@ class DoctorScreen extends StatelessWidget {
                         timeController.clear();
                       });
                     }
-                  }
-              ),
+                  }),
             ],
           ),
         ),
       ),
     );
   }
-
-
 }

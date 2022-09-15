@@ -8,17 +8,17 @@ class Reservation extends StatelessWidget {
   List<Model> list = [
     Model(
         image: "images/doctor/doctor1.jpg",
-        name: "د.فلان الفلاني1",
+        name: "د.ألاء عفانة",
         location: "رفح - الجنينة",
-        phone: "0599999999"),
+        phone: "0599328482"),
     Model(
         image: "images/doctor/doctor2.jpg",
-        name: "د.فلان الفلاني1",
+        name: "د.ناهد عبد الباري",
         location: "رفح - الجنينة",
         phone: "0599 999 999"),
     Model(
         image: "images/doctor/doctor3.jpg",
-        name: "د.فلان الفلاني1",
+        name: "د.حنان الفرع",
         location: "رفح - الجنينة",
         phone: "0599 999 999"),
     Model(

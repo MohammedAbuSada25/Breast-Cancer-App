@@ -1,4 +1,5 @@
 import 'package:breast_cancer/screens/home_screen.dart';
+import 'package:breast_cancer/screens/registration_screen.dart';
 import 'package:breast_cancer/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/my_button.dart';
@@ -114,6 +115,23 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               SizedBox(height: 10),
+              Row(
+                children: [
+                  Text("I don't have an account"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RegistrationScreen.screenRoute);
+                    },
+                    child: Text(
+                      "registration",
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
               MyButton(
                 color: colorButtonpink!,
                 title: 'Sign in',
@@ -125,7 +143,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     if (user != null) {
-                      Navigator.pushReplacementNamed(context, HomeScreen.screenRoute);
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.screenRoute);
                       setState(() {
                         showSpinner = false;
                       });
@@ -134,7 +153,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     setState(() {
                       showSpinner = false;
                     });
-                    snackBar(context, "Please enter the email and password correctly", Colors.red);
+                    snackBar(
+                        context,
+                        "Please enter the email and password correctly",
+                        Colors.red);
 
                     print(e);
                   }

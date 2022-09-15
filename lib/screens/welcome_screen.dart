@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'doctor/loginDoctor.dart';
 import 'registration_screen.dart';
 import 'signin_screen.dart';
 import '../widgets/my_button.dart';
@@ -42,16 +43,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(height: 30),
             MyButton(
               color: colorButtonpink!,
-              title: 'Sign in',
+              title: 'Login as a Doctor',
               onPressed: () {
-                Navigator.pushNamed(context, SignInScreen.screenRoute);
+                Navigator.pushNamed(context, LoginDoctor.screenRoute);
               },
             ),
             MyButton(
               color: Colors.blue[800]!,
-              title: 'register',
+              title: 'Login as a User',
               onPressed: () {
-                Navigator.pushNamed(context, RegistrationScreen.screenRoute);
+                Navigator.pushNamed(context, SignInScreen.screenRoute);
               },
             )
           ],
